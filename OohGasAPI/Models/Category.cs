@@ -11,11 +11,14 @@ public class Category
     }
 
     [Key]
-    public int CategoryId { get; set; }
+    public int Id { get; set; }
     
     [Required]
-    [StringLength(100)]
+    [StringLength(80)]
     public string? Name { get; set; }
+
+    [Required]
+    public Boolean FlgGeneral { get; set; }
 
     public ICollection<Product>? Products { get; set; }
 }

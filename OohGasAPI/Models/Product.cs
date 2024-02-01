@@ -6,7 +6,7 @@ namespace OohGasAPI.Models;
 public class Product
 {
     [Key]
-    public int ProductId { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [StringLength(80)]
@@ -26,6 +26,9 @@ public class Product
     [Column(TypeName = "decimal(10,2)")]
     public decimal CaskCost { get; set; }
 
-    public int CategoryId { get; set; }
-    public Category? Category { get; set; }
+    [Column(TypeName = "decimal(10,2)")]
+    public decimal DeliveryFee { get; set; }
+
+    public ICollection<Category>? Categories { get; set; }
+
 }
