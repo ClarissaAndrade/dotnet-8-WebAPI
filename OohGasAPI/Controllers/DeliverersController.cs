@@ -22,16 +22,16 @@ namespace OohGasAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Deliverer>>> GetDeliverers()
+        public ActionResult<IEnumerable<Deliverer>> GetDeliverers()
         {
-            return await _context.Deliverers.ToListAsync();
+            return _context.Deliverers.ToList();
         }
 
         // GET: api/Deliverers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Deliverer>> GetDeliverer(int id)
+        public ActionResult<Deliverer> GetDeliverer(int id)
         {
-            var deliverer = await _context.Deliverers.FindAsync(id);
+            var deliverer = _context.Deliverers.Find(id);
 
             if (deliverer == null)
             {
@@ -44,7 +44,7 @@ namespace OohGasAPI.Controllers
         // PUT: api/Deliverers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDeliverer(int id, Deliverer deliverer)
+        public IActionResult PutDeliverer(int id, Deliverer deliverer)
         {
             if (id != deliverer.Id)
             {
@@ -55,7 +55,7 @@ namespace OohGasAPI.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -75,26 +75,26 @@ namespace OohGasAPI.Controllers
         // POST: api/Deliverers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Deliverer>> PostDeliverer(Deliverer deliverer)
+        public ActionResult<Deliverer> PostDeliverer(Deliverer deliverer)
         {
             _context.Deliverers.Add(deliverer);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return CreatedAtAction("GetDeliverer", new { id = deliverer.Id }, deliverer);
         }
 
         // DELETE: api/Deliverers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDeliverer(int id)
+        public IActionResult DeleteDeliverer(int id)
         {
-            var deliverer = await _context.Deliverers.FindAsync(id);
+            var deliverer = _context.Deliverers.Find(id);
             if (deliverer == null)
             {
                 return NotFound();
             }
 
             _context.Deliverers.Remove(deliverer);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return NoContent();
         }
