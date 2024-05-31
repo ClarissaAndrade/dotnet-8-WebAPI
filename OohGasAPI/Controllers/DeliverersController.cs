@@ -33,7 +33,6 @@ namespace OohGasAPI.Controllers
         {
             var deliverer = _context.Deliverers.Find(id);
 
-            if (deliverer == null)
             {
                 return NotFound();
             }

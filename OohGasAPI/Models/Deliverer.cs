@@ -38,5 +38,14 @@ namespace OohGasAPI.Models
         [Required]
         [Column(TypeName = "Date")]
         public DateTime DtCnhExpiry { get; set; }
+
+
+        [Required]
+        [StringLength(30)]
+        public string? Phone { get; set; }
+
+
+        [Required]
+        public byte Status { get; set; }
     }
 }
