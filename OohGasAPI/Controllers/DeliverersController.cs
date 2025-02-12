@@ -24,14 +24,14 @@ namespace OohGasAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Deliverer>> GetDeliverers()
         {
-            return _context.Deliverers.ToList();
+            return _context.Deliverers?.ToList() ?? [];
         }
 
         // GET: api/Deliverers/5
         [HttpGet("{id}")]
         public ActionResult<Deliverer> GetDeliverer(int id)
         {
-            var deliverer = _context.Deliverers.Find(id);
+            var deliverer = _context.Deliverers?.Find(id);
 
             if (deliverer == null)
             {
@@ -77,6 +77,16 @@ namespace OohGasAPI.Controllers
         [HttpPost]
         public ActionResult<Deliverer> PostDeliverer(Deliverer deliverer)
         {
+            if (deliverer == null)
+            {
+                return BadRequest(new { Message = "Os dados do entregador são inválidos." });
+            }
+
+            if (_context.Deliverers == null)
+            {
+                return StatusCode(500, new { Message = "Erro interno: O banco de dados não está disponível." });
+            }
+
             _context.Deliverers.Add(deliverer);
             _context.SaveChanges();
 
@@ -87,13 +97,14 @@ namespace OohGasAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteDeliverer(int id)
         {
-            var deliverer = _context.Deliverers.Find(id);
+            var deliverer = _context.Deliverers?.Find(id);
+
             if (deliverer == null)
             {
                 return NotFound();
             }
 
-            _context.Deliverers.Remove(deliverer);
+            _context.Deliverers?.Remove(deliverer);
             _context.SaveChanges();
 
             return NoContent();
@@ -101,7 +112,7 @@ namespace OohGasAPI.Controllers
 
         private bool DelivererExists(int id)
         {
-            return _context.Deliverers.Any(e => e.Id == id);
+            return _context.Deliverers?.Any(e => e.Id == id) ?? false;
         }
     }
 }
