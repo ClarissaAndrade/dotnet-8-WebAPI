@@ -29,6 +29,11 @@ public class Product
     [Column(TypeName = "decimal(10,2)")]
     public decimal DeliveryFee { get; set; }
 
-    public ICollection<Category>? Categories { get; set; }
+    [Required]
+    public int CategoryId { get; set; }
+
+    // Propriedade de navegação
+    [ForeignKey("CategoryId")]
+    public Category Category { get; set; } = null!;
 
 }
