@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OohGasAPI.Context;
+using OohGasAPI.DTOs;
 using OohGasAPI.Migrations;
 using OohGasAPI.Models;
 
@@ -77,17 +78,28 @@ namespace OohGasAPI.Controllers
         // POST: api/Deliverers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public ActionResult<Category> PostCategory(Category category)
+        public ActionResult<Category> PostCategory(CategoryDTO categoryDto)
         {
-            if (category == null)
+            if (categoryDto == null)
             {
                 return BadRequest(new { Message = "Os dados da categoria são inválidos." });
+            }
+
+            if (string.IsNullOrWhiteSpace(categoryDto.Name))
+            {
+                return BadRequest(new { Message = "O nome da categoria é obrigatório." });
             }
 
             if (_context.Categories == null)
             {
                 return StatusCode(500, new { Message = "Erro interno: O banco de dados não está disponível." });
             }
+
+            var category = new Category
+            {
+                Name = categoryDto.Name,
+                IdFather = categoryDto.IdFather
+            };
 
             _context.Categories.Add(category);
             _context.SaveChanges();
