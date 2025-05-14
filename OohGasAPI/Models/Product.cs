@@ -28,9 +28,11 @@ public class Product
     [ForeignKey("CategoryId")]
     public Category Category { get; set; } = null!;
 
-    [Required]
-    public int BrandId { get; set; }
+    public int? BrandId { get; set; }
 
     [ForeignKey("BrandId")]
-    public Brand Brand { get; set; } = null!;
+    public Brand? Brand { get; set; } = null!;
+
+    [Required]
+    public byte Status { get; set; }
 }
