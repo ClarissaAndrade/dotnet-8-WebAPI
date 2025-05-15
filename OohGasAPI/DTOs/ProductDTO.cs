@@ -13,5 +13,6 @@ namespace OohGasAPI.DTOs
         public decimal DeliveryFee { get; set; }
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
+        public byte status { get; set; }
     }
 }

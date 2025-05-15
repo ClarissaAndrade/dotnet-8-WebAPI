@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OohGasAPI.Context;
 
@@ -11,9 +12,11 @@ using OohGasAPI.Context;
 namespace OohGasAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250514222602_AjusteProdutosRequireds")]
+    partial class AjusteProdutosRequireds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,13 +151,13 @@ namespace OohGasAPI.Migrations
                     b.Property<int?>("BrandId")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("CaskPrice")
+                    b.Property<decimal>("CaskPrice")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("DeliveryFee")
+                    b.Property<decimal>("DeliveryFee")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("Name")

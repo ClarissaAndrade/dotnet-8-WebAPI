@@ -17,10 +17,10 @@ public class Product
     public decimal Price { get; set; }
 
     [Column(TypeName = "decimal(10,2)")]
-    public decimal CaskPrice { get; set; }
+    public decimal? CaskPrice { get; set; } = 0;
 
     [Column(TypeName = "decimal(10,2)")]
-    public decimal DeliveryFee { get; set; }
+    public decimal? DeliveryFee { get; set; } = 0;
 
     [Required]
     public int CategoryId { get; set; }
@@ -28,7 +28,7 @@ public class Product
     [ForeignKey("CategoryId")]
     public Category Category { get; set; } = null!;
 
-    public int? BrandId { get; set; }
+    public int? BrandId { get; set; } = null;
 
     [ForeignKey("BrandId")]
     public Brand? Brand { get; set; } = null!;
